@@ -4,4 +4,6 @@
 Pet project on Swift.
 Planning to release on AppStore.
 
-~~Using RxSwift, Cartography. Experimenting with Photos framework~~ 
+__Using RxSwift, Cartography. Experimenting with Photos framework__
+
+Agapov Alexey, Sep 2017
