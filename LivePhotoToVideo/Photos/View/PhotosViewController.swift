@@ -14,6 +14,8 @@ import RxDataSources
 
 class PhotosViewController: UIViewController {
 
+    let disposeBag = DisposeBag()
+
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = view.frame.width / 2
@@ -39,6 +41,6 @@ class PhotosViewController: UIViewController {
     }
 
     private func setupBindings() {
-        viewModel.photos.
+//        viewModel.photos
     }
 }

@@ -16,6 +16,7 @@ struct Photo {
 
     init(_ asset: PHAsset) {
         self.phAsset = asset
-        self.fullResolutionImage = asset.
+        self.fullResolutionImage = UIImage()
+        self.name = ""
     }
 }

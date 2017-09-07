@@ -11,6 +11,7 @@
 		37A129D01F60312D008B6AA7 /* PhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A129CF1F60312D008B6AA7 /* PhotosService.swift */; };
 		37A129D21F603152008B6AA7 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A129D11F603152008B6AA7 /* PhotosViewModel.swift */; };
 		37A129D41F6031B5008B6AA7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A129D31F6031B5008B6AA7 /* Photo.swift */; };
+		37A129D61F616D5A008B6AA7 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A129D51F616D5A008B6AA7 /* PhotoViewModel.swift */; };
 		37C072251F6021C200AD3BEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C072241F6021C200AD3BEE /* AppDelegate.swift */; };
 		37C072271F6021C200AD3BEE /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C072261F6021C200AD3BEE /* PhotosViewController.swift */; };
 		37C0722A1F6021C200AD3BEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C072281F6021C200AD3BEE /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		37A129CF1F60312D008B6AA7 /* PhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosService.swift; sourceTree = "<group>"; };
 		37A129D11F603152008B6AA7 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		37A129D31F6031B5008B6AA7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		37A129D51F616D5A008B6AA7 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		37C072211F6021C200AD3BEE /* LivePhotoToVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePhotoToVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C072241F6021C200AD3BEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37C072261F6021C200AD3BEE /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -86,12 +88,37 @@
 		37A129CE1F60311C008B6AA7 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				37C072261F6021C200AD3BEE /* PhotosViewController.swift */,
-				37A129D11F603152008B6AA7 /* PhotosViewModel.swift */,
+				37A129D91F616E23008B6AA7 /* Model */,
+				37A129D81F616E1F008B6AA7 /* ViewModel */,
+				37A129D71F616E12008B6AA7 /* View */,
 				37A129CF1F60312D008B6AA7 /* PhotosService.swift */,
-				37A129D31F6031B5008B6AA7 /* Photo.swift */,
 			);
 			path = Photos;
+			sourceTree = "<group>";
+		};
+		37A129D71F616E12008B6AA7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				37C072261F6021C200AD3BEE /* PhotosViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		37A129D81F616E1F008B6AA7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				37A129D11F603152008B6AA7 /* PhotosViewModel.swift */,
+				37A129D51F616D5A008B6AA7 /* PhotoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		37A129D91F616E23008B6AA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				37A129D31F6031B5008B6AA7 /* Photo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		37C072181F6021C200AD3BEE = {
@@ -376,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C072271F6021C200AD3BEE /* PhotosViewController.swift in Sources */,
+				37A129D61F616D5A008B6AA7 /* PhotoViewModel.swift in Sources */,
 				37A129D21F603152008B6AA7 /* PhotosViewModel.swift in Sources */,
 				37A129D01F60312D008B6AA7 /* PhotosService.swift in Sources */,
 				37C072251F6021C200AD3BEE /* AppDelegate.swift in Sources */,
@@ -541,7 +569,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agapovco.application.LivePhotoToVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LivePhotoToVideo/LivePhotoToVideo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -561,7 +588,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agapovco.application.LivePhotoToVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LivePhotoToVideo/LivePhotoToVideo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

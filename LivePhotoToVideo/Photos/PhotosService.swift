@@ -8,14 +8,21 @@
 
 import Foundation
 import Photos
+import RxSwift
 
 class PhotosService {
-    private lazy var options = {
+    private lazy var options: PHFetchOptions = {
         let options = PHFetchOptions()
         return options
     }()
 
-    func fetchPhotos() -> PHAsset {
-        let albums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: options)
+    func fetchPhotos() -> Observable<[PHAsset]> {
+        return Observable.create { event in
+            let albums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: self.options)
+
+            event.on(.next([]))
+
+            return Disposables.create()
+        }
     }
 }

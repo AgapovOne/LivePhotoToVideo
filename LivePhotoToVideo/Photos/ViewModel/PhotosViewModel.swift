@@ -13,18 +13,20 @@ import RxCocoa
 class PhotosViewModel {
     private var service: PhotosService
 
+    // MARK: - Input
+    let reload: AnyObserver<Void>
+
+    // MARK: - Output
+    let photos: Observable<[PhotoViewModel]>
+
     init(service: PhotosService = PhotosService()) {
         self.service = service
 
-        setupBindings()
+
+        let _reload = PublishSubject<Void>()
+        self.reload = _reload.asObserver()
+
+        self.photos = Observable.just([])
     }
 
-    // MARK: - Input
-
-    // MARK: - Output
-    var photos: Observable<[Photo]> = Variable<[Photo]>([])
-
-    private func setupBindings() {
-
-    }
 }
