@@ -1,13 +1,15 @@
 PODS:
-  - Cartography (1.1.0)
-  - Differentiator (2.0.2)
-  - RxCocoa (3.6.1):
-    - RxSwift (~> 3.6)
-  - RxDataSources (2.0.2):
-    - Differentiator (~> 2.0)
-    - RxCocoa (>= 3.6.1)
-    - RxSwift (>= 3.6.1)
-  - RxSwift (3.6.1)
+  - Cartography (3.1.0)
+  - Differentiator (3.1.0)
+  - RxAtomic (4.4.2)
+  - RxCocoa (4.4.2):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxDataSources (3.1.0):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.4.2):
+    - RxAtomic (>= 4.4.2, ~> 4.4)
 
 DEPENDENCIES:
   - Cartography
@@ -19,16 +21,18 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Cartography
     - Differentiator
+    - RxAtomic
     - RxCocoa
     - RxDataSources
     - RxSwift
 
 SPEC CHECKSUMS:
-  Cartography: 0538ccb4044acbbda2266335fc58cb4228794d90
-  Differentiator: caa9b3957981a2ac8e6b2eac8a676af461caa604
-  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
-  RxDataSources: 7f190474a93a206c082c2d74c4cc9c8f7bea4feb
-  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
+  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
+  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
+  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
 
 PODFILE CHECKSUM: 1fb6958177f26f7e87c2db0495c78b3f1414474d
 
