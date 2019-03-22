@@ -18,7 +18,8 @@ class PhotosViewController: UIViewController {
 
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = view.frame.width / 2
+        let side = self.view.frame.width / 2
+        layout.itemSize = CGSize(width: side, height: side)
         layout.minimumLineSpacing = 16
         let c = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return c

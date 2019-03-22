@@ -194,7 +194,6 @@
 				37C0721E1F6021C200AD3BEE /* Frameworks */,
 				37C0721F1F6021C200AD3BEE /* Resources */,
 				22069C6B1326514EE746215A /* [CP] Embed Pods Frameworks */,
-				D07264442FCCC378EBDE6B1B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,8 +212,6 @@
 				37C072311F6021C200AD3BEE /* Sources */,
 				37C072321F6021C200AD3BEE /* Frameworks */,
 				37C072331F6021C200AD3BEE /* Resources */,
-				906B0D068412AE340FEAD1CA /* [CP] Embed Pods Frameworks */,
-				077FE50B69A99D7D08790DAB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,11 +235,12 @@
 				TargetAttributes = {
 					37C072201F6021C200AD3BEE = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					37C072341F6021C200AD3BEE = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 37C072201F6021C200AD3BEE;
 					};
@@ -288,28 +286,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		077FE50B69A99D7D08790DAB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LivePhotoToVideoTests/Pods-LivePhotoToVideoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		22069C6B1326514EE746215A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LivePhotoToVideo/Pods-LivePhotoToVideo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LivePhotoToVideo/Pods-LivePhotoToVideo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -326,7 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LivePhotoToVideo/Pods-LivePhotoToVideo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LivePhotoToVideo/Pods-LivePhotoToVideo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		70E43998F4C1CA1AEFA16DEC /* [CP] Check Pods Manifest.lock */ = {
@@ -345,36 +328,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		906B0D068412AE340FEAD1CA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LivePhotoToVideoTests/Pods-LivePhotoToVideoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D07264442FCCC378EBDE6B1B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LivePhotoToVideo/Pods-LivePhotoToVideo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EFE5A48DB29CD149431AE8A0 /* [CP] Check Pods Manifest.lock */ = {
@@ -570,7 +523,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.agapovco.application.LivePhotoToVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -588,7 +542,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agapovco.application.LivePhotoToVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -605,7 +560,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agapovco.application.LivePhotoToVideoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LivePhotoToVideo.app/LivePhotoToVideo";
 			};
@@ -623,7 +579,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agapovco.application.LivePhotoToVideoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LivePhotoToVideo.app/LivePhotoToVideo";
 			};
