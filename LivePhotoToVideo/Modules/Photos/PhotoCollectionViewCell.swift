@@ -12,9 +12,13 @@ import Cartography
 
 class PhotoCollectionViewCell: UICollectionViewCell, Reusable {
 
-    private let imageView = UIImageView()
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
 
-    init() {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         setup()
     }
@@ -30,6 +34,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, Reusable {
             i.edges == i.superview!.edges
         }
     }
+
+    var identifier: String = ""
 
     var image: UIImage? {
         didSet {
