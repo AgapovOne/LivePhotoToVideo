@@ -3,6 +3,8 @@
 import UIKit
 import PlaygroundSupport
 
+import UI
+
 class MyViewController : UIViewController {
     override func loadView() {
         let view = UIView()
@@ -17,5 +19,9 @@ class MyViewController : UIViewController {
         self.view = view
     }
 }
-// Present the view controller in the Live View window
+
+
+
+
+PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.liveView = MyViewController()

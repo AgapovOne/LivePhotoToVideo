@@ -1,20 +1,25 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
+use_frameworks!
 
-target 'LivePhotoToVideo' do
-  use_frameworks!
+abstract_target 'Workspace' do
 
   # Main
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxDataSources'
 
-  # UI
-  pod 'Cartography'
+  target 'UI' do
+    pod 'Cartography'
+    pod 'Reusable'
+  end
+
+  target 'LivePhotoToVideo'
 
   target 'LivePhotoToVideoTests' do
     inherit! :search_paths
-    # Pods for testing
+
+
   end
 
 end
