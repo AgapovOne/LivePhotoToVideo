@@ -6,11 +6,11 @@
 //  Copyright © 2017 agapovco. All rights reserved.
 //
 
-import Foundation
+import UI
 import RxSwift
 import RxCocoa
 
-class PhotosViewModel {
+class PhotosViewModelImpl: PhotosViewModel {
     private var service: PhotosService
 
     // MARK: - Input

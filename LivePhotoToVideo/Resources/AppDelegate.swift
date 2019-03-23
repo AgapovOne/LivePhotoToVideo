@@ -15,8 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: PermissionsViewController.self))
+//        let viewController = PermissionsViewController()
+        let viewController = PhotosViewController(viewModel: PhotosViewModelImpl())
 
+        window = UIWindow()
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
 
         return true
     }
