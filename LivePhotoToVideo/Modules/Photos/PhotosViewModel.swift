@@ -22,11 +22,10 @@ class PhotosViewModel {
     init(service: PhotosService = PhotosService()) {
         self.service = service
 
-
         let _reload = PublishSubject<Void>()
         self.reload = _reload.asObserver()
 
         self.photos = Observable.just([])
+//        self.photos = service.fetchPhotos()
     }
-
 }
