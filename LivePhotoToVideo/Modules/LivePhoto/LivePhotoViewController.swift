@@ -11,6 +11,8 @@ import Cartography
 import Photos
 import PhotosUI
 import MobileCoreServices
+import RxSwift
+import RxCocoa
 
 public final class LivePhotoViewController: UIViewController {
 
@@ -23,7 +25,24 @@ public final class LivePhotoViewController: UIViewController {
     private lazy var statusImageView = UIImageView()
     private lazy var emptyView = EmptyPhotoView()
     private lazy var captionLabel = UILabel.UI.headline(text: "Choose a Photo.\nUse it as a video or a GIF.")
-    private lazy var bottomButton = UIButton.UI.big(title: "Choose a Photo", color: .charcoal)
+    private lazy var choosePhotoButton: UIButton = {
+        let button = UIButton.UI.big(title: "Choose a Photo", color: .charcoal)
+        button.addTarget(self, action: #selector(tapChooseAPhoto), for: .touchUpInside)
+        return button
+    }()
+    private lazy var convertToGifButton: UIButton = {
+        let button = UIButton.UI.big(title: "Choose a Photo", color: .charcoal)
+        button.addTarget(self, action: #selector(tapChooseAPhoto), for: .touchUpInside)
+        return button
+    }()
+
+    private var assetSize: CGSize {
+        return CGSize(width: photoLiveView.frame.size.width * UIScreen.main.scale,
+                      height: photoLiveView.frame.size.height * UIScreen.main.scale)
+    }
+
+    private let disposeBag = DisposeBag()
+    private let phAssetRelay = BehaviorRelay<PHAsset?>(value: nil)
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,34 +50,63 @@ public final class LivePhotoViewController: UIViewController {
         view.backgroundColor = .white
 
         view.addSubview(captionLabel)
-        view.addSubview(bottomButton)
+        view.addSubview(choosePhotoButton)
+        view.addSubview(convertToGifButton)
         view.addSubview(photoLiveView)
 
         view.addSubview(statusImageView)
         view.addSubview(emptyView)
 
-        constrain(captionLabel, photoLiveView, statusImageView, emptyView, bottomButton) { caption, photo, statusImage, emptyView, bottomButton in
-            [caption, photo, bottomButton].forEach {
+        constrain(captionLabel, photoLiveView, statusImageView, emptyView, choosePhotoButton) { caption, photo, status, empty, chooseButton in
+            [caption, photo, chooseButton].forEach {
                 $0.leading == $0.superview!.leading + 16
                 $0.trailing == $0.superview!.trailing - 16
             }
 
             caption.top == caption.superview!.top + 64
             photo.top == caption.bottom + 16
-            photo.bottom == bottomButton.top - 16
-            bottomButton.bottom == bottomButton.superview!.bottom - 16
+            photo.bottom == chooseButton.top - 16
+            chooseButton.bottom == chooseButton.superview!.bottom - 16
 
-            statusImage.top == photo.top + 8
-            statusImage.leading == photo.leading + 8
+            status.top == photo.top + 8
+            status.leading == photo.leading + 8
 
-            emptyView.center == photo.center
+            empty.center == photo.center
         }
 
         photoLiveView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
 
-        bottomButton.addTarget(self, action: #selector(tapChooseAPhoto), for: .touchUpInside)
+        setupBindings()
+    }
 
-        setEmptyView(isHidden: false)
+    private func setupBindings() {
+        phAssetRelay
+            .subscribe(onNext: { [weak self] asset in
+                guard let self = self else { return }
+                guard let asset = asset else {
+                    self.setLivePhoto(nil)
+                    return
+                }
+
+                switch asset.mediaSubtypes {
+                case .photoLive:
+                    PHImageManager.default().requestLivePhoto(for: asset,
+                                                              targetSize: self.assetSize,
+                                                              contentMode: .aspectFit,
+                                                              options: nil) { [weak self] (livePhoto, _) in
+                                                                self?.setLivePhoto(livePhoto)
+                    }
+                default:
+                    self.setLivePhoto(nil)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func setLivePhoto(_ photo: PHLivePhoto?) {
+        photoLiveView.livePhoto = photo
+        statusImageView.image = photo == nil ? nil : PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
+        setEmptyView(isHidden: photo != nil)
     }
 
     private func setEmptyView(isHidden: Bool) {
@@ -75,46 +123,20 @@ public final class LivePhotoViewController: UIViewController {
 }
 
 extension LivePhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("CANCEL")
-    }
-
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
 
-        if let livePhoto = info[.livePhoto] as? PHLivePhoto {
-            photoLiveView.livePhoto = livePhoto
-            statusImageView.image = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-            setEmptyView(isHidden: true)
-        } else {
-            if #available(iOS 11.0, *) {
-                guard
-                    let asset = info[.phAsset] as? PHAsset
-                    else {
-                        photoLiveView.livePhoto = nil
-                        statusImageView.image = nil
-                        setEmptyView(isHidden: false)
-                        return
-                }
-                switch asset.mediaSubtypes {
-                case .photoLive:
-                    let size = CGSize(width: photoLiveView.frame.size.width * UIScreen.main.scale,
-                                      height: photoLiveView.frame.size.height * UIScreen.main.scale)
-                    PHImageManager.default().requestLivePhoto(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { (livePhoto, dict) in
-                        self.photoLiveView.livePhoto = livePhoto
-                        self.statusImageView.image = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-                        self.setEmptyView(isHidden: true)
-                    }
-                default:
-                    photoLiveView.livePhoto = nil
-                    statusImageView.image = nil
-                    setEmptyView(isHidden: false)
-                }
-            } else {
-                photoLiveView.livePhoto = nil
-                statusImageView.image = nil
-                setEmptyView(isHidden: false)
+        if #available(iOS 11.0, *) {
+            guard
+                let asset = info[.phAsset] as? PHAsset
+                else {
+                    phAssetRelay.accept(nil)
+                    return
             }
+
+            phAssetRelay.accept(asset)
+        } else {
+            phAssetRelay.accept(nil)
         }
     }
 }
