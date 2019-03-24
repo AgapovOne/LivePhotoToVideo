@@ -12,15 +12,21 @@ extension UILabel {
     enum UI {
         static var headline: UILabel {
             let label = UILabel()
-            let font = UIFont.systemFont(ofSize: 50, weight: .black)
+            let font = UIFont.systemFont(ofSize: 30, weight: .heavy)
 
             if #available(iOS 11.0, *) {
                 label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: font)
             } else {
                 label.font = font
             }
-            label.textColor = UIColor(white: 0.1, alpha: 1)
+            label.textColor = .darkCharcoal
             label.numberOfLines = 0
+            return label
+        }
+
+        static func headline(text: String) -> UILabel {
+            let label = headline
+            label.text = text
             return label
         }
 
@@ -33,7 +39,7 @@ extension UILabel {
             } else {
                 label.font = font
             }
-            label.textColor = UIColor(white: 0.25, alpha: 1)
+            label.textColor = .darkCharcoal
             label.numberOfLines = 0
             return label
         }

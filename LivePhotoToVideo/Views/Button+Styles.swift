@@ -16,7 +16,12 @@ extension UIButton {
             button.backgroundColor = color
             button.layer.cornerRadius = 12
 
-            let font = UIFont.systemFont(ofSize: 20, weight: .light)
+            let font: UIFont
+            if #available(iOS 11.0, *) {
+                font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: UIFont.systemFont(ofSize: 17, weight: .semibold))
+            } else {
+                font = UIFont.systemFont(ofSize: 17, weight: .light)
+            }
 
             let normalTitle = NSAttributedString(string: title,
                                                  attributes: [.font: font,
@@ -27,6 +32,8 @@ extension UIButton {
                                                       attributes: [.font: font,
                                                                    .foregroundColor: UIColor.white.withAlphaComponent(0.75)])
             button.setAttributedTitle(highlightedTitle, for: .highlighted)
+
+            button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
             return button
         }
     }
