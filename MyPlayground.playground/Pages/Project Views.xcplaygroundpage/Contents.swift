@@ -8,7 +8,8 @@ import UI
 class fvm: PhotosViewModel {}
 
 //let controller = PermissionsViewController()
-let controller = PhotosViewController(viewModel: fvm())
+//let controller = PhotosViewController(viewModel: fvm())
+let controller = LivePhotoViewController()
 
 //let addTraits = UITraitCollection(preferredContentSizeCategory: .extraLarge)
 //let addTraits = UITraitCollection(preferredContentSizeCategory: .extraSmall)
