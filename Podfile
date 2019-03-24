@@ -14,7 +14,9 @@ abstract_target 'Workspace' do
     pod 'Reusable'
   end
 
-  target 'LivePhotoToVideo'
+  target 'LivePhotoToVideo' do
+    pod 'Reveal-SDK', :configurations => ['Debug']
+  end
 
   target 'LivePhotoToVideoTests' do
     inherit! :search_paths

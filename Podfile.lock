@@ -6,6 +6,7 @@ PODS:
     - Reusable/View (= 4.0.5)
   - Reusable/Storyboard (4.0.5)
   - Reusable/View (4.0.5)
+  - Reveal-SDK (21)
   - RxAtomic (4.4.2)
   - RxCocoa (4.4.2):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -19,6 +20,7 @@ PODS:
 DEPENDENCIES:
   - Cartography
   - Reusable
+  - Reveal-SDK
   - RxCocoa
   - RxDataSources
   - RxSwift
@@ -28,6 +30,7 @@ SPEC REPOS:
     - Cartography
     - Differentiator
     - Reusable
+    - Reveal-SDK
     - RxAtomic
     - RxCocoa
     - RxDataSources
@@ -37,11 +40,12 @@ SPEC CHECKSUMS:
   Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
+  Reveal-SDK: 3523e0eb7c562811c51bb71da6e523a6373702c8
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
   RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
 
-PODFILE CHECKSUM: 427ef3e6b11d8b2ee65d8b919bd6ed170e8121b1
+PODFILE CHECKSUM: 9370896e7937458fd2fd92ca2fef5da4b43c9d81
 
 COCOAPODS: 1.6.1
