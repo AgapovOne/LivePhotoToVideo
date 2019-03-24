@@ -23,6 +23,7 @@
 		8DA1182322460E30009E586F /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1182122460E30009E586F /* PhotoCollectionViewCell.xib */; };
 		8DA1182422460E34009E586F /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C072261F6021C200AD3BEE /* PhotosViewController.swift */; };
 		8DA11826224688B2009E586F /* LivePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA11825224688B2009E586F /* LivePhotoViewController.swift */; };
+		8DAC4F742246BF940040E756 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC4F722246BF8F0040E756 /* UIColor+Additions.swift */; };
 		8DBEA2002245FB4F003E4754 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBEA1F72245FB4F003E4754 /* UI.framework */; };
 		8DBEA2072245FB4F003E4754 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBEA2062245FB4F003E4754 /* UITests.swift */; };
 		8DBEA2092245FB4F003E4754 /* UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DBEA1F92245FB4F003E4754 /* UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -103,6 +104,7 @@
 		8DA1182022460E30009E586F /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DA1182122460E30009E586F /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		8DA11825224688B2009E586F /* LivePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoViewController.swift; sourceTree = "<group>"; };
+		8DAC4F722246BF8F0040E756 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		8DBEA1F02245FA36003E4754 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		8DBEA1F72245FB4F003E4754 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DBEA1F92245FB4F003E4754 /* UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UI.h; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 		8DA1181D22460362009E586F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8DAC4F712246BE8D0040E756 /* Styles */,
 				8DA1181A22460330009E586F /* Label+Styles.swift */,
 				8DA1181E224609F0009E586F /* Button+Styles.swift */,
 			);
@@ -251,6 +254,14 @@
 				8DA11825224688B2009E586F /* LivePhotoViewController.swift */,
 			);
 			path = LivePhoto;
+			sourceTree = "<group>";
+		};
+		8DAC4F712246BE8D0040E756 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				8DAC4F722246BF8F0040E756 /* UIColor+Additions.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		8DBEA1ED2245F9CC003E4754 /* Services */ = {
@@ -612,6 +623,7 @@
 				8DA11826224688B2009E586F /* LivePhotoViewController.swift in Sources */,
 				8DA1181F224609F0009E586F /* Button+Styles.swift in Sources */,
 				8DA1182422460E34009E586F /* PhotosViewController.swift in Sources */,
+				8DAC4F742246BF940040E756 /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
