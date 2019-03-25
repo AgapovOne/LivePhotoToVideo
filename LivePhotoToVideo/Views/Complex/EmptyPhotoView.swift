@@ -29,7 +29,7 @@ class EmptyPhotoView: UIView {
 
     private lazy var emptyView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 8
+        stackView.spacing = 12
         stackView.axis = .vertical
         stackView.alignment = .center
 
@@ -61,8 +61,8 @@ class EmptyPhotoView: UIView {
 
         let translationAnimation = CABasicAnimation(keyPath: "transform")
         translationAnimation.fromValue = CATransform3DIdentity
-        translationAnimation.toValue = CATransform3DMakeTranslation(0, 10, 0)
-        translationAnimation.duration = 2
+        translationAnimation.toValue = CATransform3DMakeTranslation(0, 8, 0)
+        translationAnimation.duration = 1.5
         translationAnimation.autoreverses = true
         translationAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         translationAnimation.repeatCount = .greatestFiniteMagnitude
@@ -72,7 +72,7 @@ class EmptyPhotoView: UIView {
         let scaleAnimation = CABasicAnimation(keyPath: "transform")
         scaleAnimation.fromValue = CATransform3DIdentity
         scaleAnimation.toValue = CATransform3DMakeScale(1.25, 1.25, 1)
-        scaleAnimation.duration = 2
+        scaleAnimation.duration = 1.5
         scaleAnimation.autoreverses = true
         scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         scaleAnimation.repeatCount = .greatestFiniteMagnitude
