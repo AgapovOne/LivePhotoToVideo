@@ -43,6 +43,7 @@ public final class LivePhotoViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
     private let phAssetRelay = BehaviorRelay<PHAsset?>(value: nil)
+    private var fileURLS = [URL]()
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,17 +115,75 @@ public final class LivePhotoViewController: UIViewController {
     }
 
     @objc private func tapChooseAPhoto() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = [kUTTypeLivePhoto as String, kUTTypeImage as String]
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        if let asset = phAssetRelay.value {
+            /*
+//            print(asset)
+//
+//            PHImageManager.default().requestLivePhoto(for: asset, targetSize: self.assetSize, contentMode: .aspectFit, options: nil) { [weak self] (livePhoto, dict) in
+//
+//                print(livePhoto, dict)
+//
+//                guard let livePhoto = livePhoto else { return }
+//                let resources = PHAssetResource.assetResources(for: livePhoto)
+//                print(resources)
+//
+//                let videoAsset = resources.first { $0.type == .video }
+//
+//                print(videoAsset)
+//
+//            }
+//            let imageOptions = PHImageRequestOptions()
+//            PHImageManager.default().requestImageData(for: asset, options: imageOptions) { (data, somestring, orientation, dict) in
+//                print(data, somestring, orientation, dict)
+//            }*/
+
+//            let resources = PHAssetResource.assetResources(for: asset)
+//            print(resources)
+//
+//            guard let videoAsset = resources.first(where: { $0.type == .pairedVideo }) else { return }
+//
+//            print(videoAsset.assetLocalIdentifier)
+//
+//            let options = PHFetchOptions()
+//            let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [videoAsset.assetLocalIdentifier], options: nil)
+//
+//            print(fetchResult)
+//
+//            guard let foundVideoAsset = fetchResult.firstObject else { return }
+//
+//            print(foundVideoAsset.duration)
+//            PHImageManager.default().requestPlayerItem(forVideo: foundVideoAsset, options: PHVideoRequestOptions()) { (playerItem, dict) in
+//                print(playerItem, dict)
+//            }
+//            PHImageManager.default().requestAVAsset(forVideo: foundVideoAsset, options: PHVideoRequestOptions()) { (asset, audioMix, dict) in
+//                print(asset, audioMix, dict)
+//            }
+
+//            NSTemporaryDirectory()
+
+            guard let fileURL = fileURLS.last else { return }
+            let activity = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+            present(activity, animated: true, completion: nil)
+
+        } else {
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.mediaTypes = [kUTTypeLivePhoto as String, kUTTypeImage as String]
+            picker.delegate = self
+            picker.allowsEditing = false;
+            present(picker, animated: true, completion: nil)
+        }
     }
 }
 
 extension LivePhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
+
+        if let livePhoto = info[.livePhoto] as? PHLivePhoto {
+            print(livePhoto)
+            saveFile(for: livePhoto)
+        }
 
         if #available(iOS 11.0, *) {
             guard
@@ -137,6 +196,77 @@ extension LivePhotoViewController: UIImagePickerControllerDelegate, UINavigation
             phAssetRelay.accept(asset)
         } else {
             phAssetRelay.accept(nil)
+        }
+    }
+
+    func saveFile(for livePhoto: PHLivePhoto) {
+        guard let directory = generateFolderForLivePhotoResources() else { return }
+        let assetResources = PHAssetResource.assetResources(for: livePhoto)
+
+        for resource in assetResources {
+            var buffer: Data?
+            PHAssetResourceManager.default().requestData(for: resource, options: nil, dataReceivedHandler: { (data) in
+                buffer = data
+            }) { (error) in
+                guard error == nil else {
+                    print("Could not request data for resource: \(resource), error: \(error)")
+                    return
+                }
+//                let ext = UTTypeCopyPreferredTagWithClass(resource.uniformTypeIdentifier as CFString, kUTTagClassFilenameExtension)?
+//                    .takeRetainedValue()
+
+                let identifier = resource.uniformTypeIdentifier
+
+                let fileURL = directory
+                    .appendingPathComponent(UUID().uuidString)
+//                    .appendingPathExtension(identifier)
+//                    .appendingPathComponent(resource.originalFilename)
+                .appendingPathExtension(URL(string: resource.originalFilename)?.pathExtension ?? "file")
+//                    .appendingPathExtension(ext)
+
+
+                guard let buffer = buffer else {
+                    print("Could not find data for ph asset resource \(resource)")
+                    return
+                }
+                do {
+                    try buffer.write(to: fileURL)
+                    print("Saved to file path \(fileURL)")
+                    self.fileURLS.append(fileURL)
+                } catch {
+                    print("Could not save resource \(resource) to file path \(fileURL)")
+                }
+
+
+                //                    let maybeExt = UTTypeCopyPreferredTagWithClass(
+                //                        resource.uniformTypeIdentifier,
+                //                        kUTTagClassFilenameExtension
+                //                        )?.takeRetainedValue()
+                //
+                //                    guard let ext = maybeExt else {
+                //                        return
+                //                    }
+                //
+                //                    var fileUrl = inDirectory.URLByAppendingPathComponent(NSUUID().UUIDString)
+                //                    fileUrl = fileUrl.URLByAppendingPathExtension(ext as String)
+                //
+                //                    if(!buffer.writeToURL(fileUrl, atomically: true)) {
+                //                        print("Could not save resource \(resource) to filepath \(fileUrl)")
+                //                    }
+            }
+        }
+    }
+
+    func generateFolderForLivePhotoResources() -> URL? {
+        let photoDirectory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).appendingPathComponent(UUID().uuidString)
+
+        let fileManager = FileManager()
+        do {
+            try fileManager.createDirectory(at: photoDirectory, withIntermediateDirectories: true, attributes: nil)
+
+            return photoDirectory
+        } catch {
+            return nil
         }
     }
 }
